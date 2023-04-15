@@ -1,5 +1,6 @@
 <script>
 	import Header from '../components/Header.svelte';
+	import Footer from '../components/Footer.svelte';
 	import './styles.css';
 </script>
 
@@ -10,11 +11,11 @@
 		<slot />
 	</main>
 
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
+	<Footer />
 </div>
 
-<style>
-
+<style lang="scss">
+	.app {
+		max-width: 76rem;
+	}
 </style>
