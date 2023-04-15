@@ -1,6 +1,5 @@
 <script>
 	import { page } from '$app/stores';
-	import logo from '$lib/images/logo.svg';
 	import HeaderCart from "./HeaderCart.svelte";
 </script>
 
@@ -84,15 +83,19 @@
 			li {
 				margin: 0 1rem;
 
-				a {
-					color: #000;
-					text-decoration: none;
+				&[aria-current='page'] a,
+				a:hover {
+					color: tomato;
+					text-decoration: underline;
+					text-underline-offset: 8px;
+					text-decoration-color: #f6a596;
+      }
 
-					&:hover {
-						text-decoration: underline;
-					}
-				}
-			}
-		}
-	}
+      a {
+        color: #000;
+        text-decoration: none;
+      }
+    }
+  }
+}
 </style>
