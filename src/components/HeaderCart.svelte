@@ -9,6 +9,10 @@
     fill: #000;
     cursor: pointer;
 
+    path {
+      transition: fill 0.2s ease;
+    }
+
     &:hover {
       path {
         fill: tomato;
