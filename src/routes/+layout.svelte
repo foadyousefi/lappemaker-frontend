@@ -17,5 +17,6 @@
 <style lang="scss">
 	.app {
 		max-width: 76rem;
+		width: 100%;
 	}
 </style>
