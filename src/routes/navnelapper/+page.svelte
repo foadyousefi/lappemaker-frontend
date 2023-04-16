@@ -18,11 +18,8 @@
   $: inputsFilled = (firstInput.length > 0) + (secondInput.length > 0) + (thirdInput.length > 0)
   $: maxFontSize = 70 - ((inputsFilled - 1) * 3)
   $: firstFont = maxFontSize - firstInput.length * 2.2
-  $: firstPosition = (secondInput.length && thirdInput.length) ? '25%' : ((secondInput.length && !thirdInput.length) || (!secondInput.length && thirdInput.length)) ? '35%' : '50%'
   $: secondFont = maxFontSize - secondInput.length * 2.2
-  $: secondPosition = (firstInput.length && thirdInput.length) ? '50%' : ((firstInput.length && !thirdInput.length) || (!firstInput.length && thirdInput.length)) ? '65%' : '50%'
   $: thirdFont = maxFontSize - thirdInput.length * 2.2
-  $: thirdPosition = (firstInput.length && secondInput.length) ? '75%' : ((firstInput.length && !secondInput.length) || (!firstInput.length && secondInput.length)) ? '65%' : '50%'
 
   const inputStorage = () => {
     navnelapp.set({firstInput, secondInput, thirdInput})
@@ -60,9 +57,15 @@
       <div class="preview">
         <div class="image">
           <div class="text">
-            <div class="first" style="font-size: {firstFont}px;line-height:{firstFont > 50 ? 0.9 : 1.1}">{firstInput}</div>
-            <div class="second" style="font-size: {secondFont}px;line-height:{secondFont > 50 ? 0.9 : 1.1}">{secondInput}</div>
-            <div class="third" style="font-size: {thirdFont}px;line-height:{thirdFont > 50 ? 0.9 : 1.1}">{thirdInput}</div>
+            {#if firstInput.length}
+              <div class="first" style="font-size: {firstFont}px;">{firstInput}</div>
+            {/if}
+            {#if secondInput.length}
+              <div class="second" style="font-size: {secondFont}px;">{secondInput}</div>
+            {/if}
+            {#if thirdInput.length}
+              <div class="third" style="font-size: {thirdFont}px;">{thirdInput}</div>
+            {/if}
           </div>
         </div>
       </div>
@@ -134,12 +137,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-evenly;
       height: 100%;
       aspect-ratio: 30/13;
 
       > div {
-        line-height: 1.1;
+        line-height: 0.9;
         font-weight: 700;
       }
     }
