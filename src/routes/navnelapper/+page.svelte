@@ -2,6 +2,7 @@
   import type { PageData } from './$types';
   import { onMount } from 'svelte';
   import navnelapp from '$lib/stores/navnelapp';
+  import { icons, selectedIcon } from '$lib/stores/icons';
 
   export let data: PageData;
 
@@ -26,6 +27,10 @@
 
   const inputStorage = () => {
     navnelapp.set({firstInput, secondInput, thirdInput, showIcon})
+  }
+
+  const selectIcon = (id) => {
+    selectedIcon.set(id)
   }
 
 
@@ -85,7 +90,7 @@
     </div>
     <div class="modifier-options">
       {#if selectedModifier === 'icons'}
-        <div class="icons">
+        <div class="icons-section">
           <label class="switch">
             <input type="checkbox" bind:checked={showIcon} on:change={inputStorage}>
             <span class="slider">
@@ -93,6 +98,11 @@
             </span>
             <span class="switch-text">Motiv av og på</span>
           </label>
+          <div class="icons">
+            {#each $icons as icon}
+              <img class="{$selectedIcon === icon.id ? 'selected' : ''}" src={icon.path} alt={icon.name} on:click={() => selectIcon(icon.id)}>
+            {/each}
+          </div>
         </div>
       {/if}
       {#if selectedModifier === 'background'}
@@ -204,11 +214,35 @@
     }
 
     .modifier-options {
-      .icons,
-      .backgrounds,
-      .fonts {
+      .icons-section,
+      .backgrounds-section,
+      .fonts-section {
         padding: 0.5rem;
         border: 1px solid #ccc;
+      }
+    }
+
+    .icons {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 0.5rem;
+      margin-top: 1rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 1/1;
+        object-fit: contain;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #eee;
+
+        &:hover,
+        &.selected {
+          border: 1px solid tomato;
+          background-color: lighten(tomato, 30%);
+        }
       }
     }
   }

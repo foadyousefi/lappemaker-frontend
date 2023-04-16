@@ -1,5 +1,4 @@
 import { BASEURL, CLIENTKEY, CLIENTSECRET } from '$env/static/private';
-import { dev } from '$app/environment';
 
 export async function get( resource ) {
     return await fetch(`${BASEURL}/${resource}`, {
