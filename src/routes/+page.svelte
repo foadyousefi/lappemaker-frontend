@@ -1,6 +1,5 @@
 <script>
-	import Counter from '../components/Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
+	import Counter from '../lib/Counter.svelte';
 </script>
 
 <svelte:head>
@@ -10,12 +9,6 @@
 
 <section>
 	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-			</picture>
-		</span>
-
 		to your new<br />SvelteKit app
 	</h1>
 
