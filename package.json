@@ -2,7 +2,7 @@
 	"name": "lappemaker",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
