@@ -1,6 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import HeaderCart from "./HeaderCart.svelte";
+	import HeaderCart from "$lib/HeaderCart.svelte";
 </script>
 
 <header>
@@ -31,6 +31,9 @@
 		<ul>
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
+			</li>
+			<li aria-current={$page.url.pathname === '/navnelapper' ? 'page' : undefined}>
+				<a href="/navnelapper">Navnelapper</a>
 			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
