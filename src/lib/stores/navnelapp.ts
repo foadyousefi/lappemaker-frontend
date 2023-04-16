@@ -5,12 +5,14 @@ interface Inputs {
     firstInput: string;
     secondInput: string;
     thirdInput: string;
+    showIcon: boolean;
 }
 
 const defaultValue:Inputs = {
     firstInput: '',
     secondInput: '',
-    thirdInput: ''
+    thirdInput: '',
+    showIcon: true
 }
 const initialValue = browser ? JSON.parse(window.localStorage.getItem('navnelapp_inputs')) ?? defaultValue : defaultValue;
 

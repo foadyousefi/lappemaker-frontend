@@ -15,6 +15,7 @@
       firstInput = $navnelapp.firstInput
       secondInput = $navnelapp.secondInput
       thirdInput = $navnelapp.thirdInput
+      showIcon = $navnelapp.showIcon
   })
 
   $: inputsFilled = (firstInput.length > 0) + (secondInput.length > 0) + (thirdInput.length > 0)
@@ -24,7 +25,7 @@
   $: thirdFont = maxFontSize - thirdInput.length * 2.2
 
   const inputStorage = () => {
-    navnelapp.set({firstInput, secondInput, thirdInput})
+    navnelapp.set({firstInput, secondInput, thirdInput, showIcon})
   }
 
 
@@ -86,7 +87,7 @@
       {#if selectedModifier === 'icons'}
         <div class="icons">
           <label class="switch">
-            <input type="checkbox" bind:checked={showIcon}>
+            <input type="checkbox" bind:checked={showIcon} on:change={inputStorage}>
             <span class="slider">
               <span class="slide"></span>
             </span>
