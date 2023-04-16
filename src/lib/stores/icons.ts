@@ -70,12 +70,7 @@ const iconsArray:Icon[] = [
         category: 'unicorn'
     }
 ]
-const defaultIcon:Icon = {
-    id: 8,
-    name: 'Portrait',
-    path: 'icons/unicorn/portrait.svg',
-    category: 'unicorn'
-}
+const defaultIcon:Icon = iconsArray[7]
 const selected = browser ? JSON.parse(window.localStorage.getItem('selected_icon')) ?? defaultIcon : defaultIcon;
 const selectedIcon = writable<Icon>(selected);
 selectedIcon.subscribe((value:Icon) => {
