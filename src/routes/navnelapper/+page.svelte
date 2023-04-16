@@ -21,16 +21,16 @@
 
   $: inputsFilled = (firstInput.length > 0) + (secondInput.length > 0) + (thirdInput.length > 0)
   $: maxFontSize = 70 - ((inputsFilled - 1) * 3)
-  $: firstFont = maxFontSize - firstInput.length * 2.2
-  $: secondFont = maxFontSize - secondInput.length * 2.2
-  $: thirdFont = maxFontSize - thirdInput.length * 2.2
+  $: firstFont = maxFontSize - firstInput.length * 2.4
+  $: secondFont = maxFontSize - secondInput.length * 2.4
+  $: thirdFont = maxFontSize - thirdInput.length * 2.4
 
   const inputStorage = () => {
     navnelapp.set({firstInput, secondInput, thirdInput, showIcon})
   }
 
-  const selectIcon = (id) => {
-    selectedIcon.set(id)
+  const selectIcon = (icon) => {
+    selectedIcon.set(icon)
   }
 
 
@@ -63,7 +63,10 @@
         </div>
       </div>
       <div class="preview">
-        <div class="image">
+        <div class="result-image">
+          {#if showIcon && $selectedIcon}
+            <img src={$selectedIcon.path} alt={$selectedIcon.name}>
+          {/if}
           <div class="text">
             {#if firstInput.length}
               <div class="first" style="font-size: {firstFont}px;">{firstInput}</div>
@@ -100,7 +103,7 @@
           </label>
           <div class="icons">
             {#each $icons as icon}
-              <img class="{$selectedIcon === icon.id ? 'selected' : ''}" src={icon.path} alt={icon.name} on:click={() => selectIcon(icon.id)}>
+              <img class="{$selectedIcon.id === icon.id ? 'selected' : ''}" src={icon.path} alt={icon.name} on:click={() => selectIcon(icon)}>
             {/each}
           </div>
         </div>
@@ -166,24 +169,34 @@
     justify-content: center;
   }
 
-  .image {
+  .result-image {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
     width: 100%;
     height: 100%;
     background: tomato;
     border-radius: 14px;
+    aspect-ratio: 30/13;
 
     .text {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-evenly;
+      position: relative;
+      top: -2px;
       height: 100%;
-      aspect-ratio: 30/13;
 
       > div {
-        line-height: 0.9;
+        line-height: 0.5;
         font-weight: 700;
       }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
     }
   }
 
