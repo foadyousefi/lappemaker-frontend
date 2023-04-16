@@ -94,13 +94,22 @@
     <div class="modifier-options">
       {#if selectedModifier === 'icons'}
         <div class="icons-section">
-          <label class="switch">
-            <input type="checkbox" bind:checked={showIcon} on:change={inputStorage}>
-            <span class="slider">
-              <span class="slide"></span>
-            </span>
-            <span class="switch-text">Motiv av og på</span>
-          </label>
+          <div class="section-filters">
+            <label class="switch">
+              <input type="checkbox" bind:checked={showIcon} on:change={inputStorage}>
+              <span class="slider">
+                <span class="slide"></span>
+              </span>
+              <span class="switch-text">Motiv av og på</span>
+            </label>
+            <div class="icon-categories">
+              <div class="all">Alle</div>
+              <div class="animals">Dyr</div>
+              <div class="figures">Figurer</div>
+              <div class="food">Mat</div>
+              <div class="unicorns">Enhjørning</div>
+            </div>
+          </div>
           <div class="icons">
             {#each $icons as icon}
               <img class="{$selectedIcon.id === icon.id ? 'selected' : ''}" src={icon.path} alt={icon.name} on:click={() => selectIcon(icon)}>
@@ -255,6 +264,35 @@
         &.selected {
           border: 1px solid tomato;
           background-color: lighten(tomato, 30%);
+        }
+      }
+    }
+  }
+
+  .icons-section {
+    .section-filters {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+
+      .icon-categories {
+        display: flex;
+        gap: 1rem;
+        cursor: pointer;
+
+        .all,
+        .animals,
+        .figures,
+        .food,
+        .unicorns {
+          border: 1px solid red;
+          padding: 0.3rem 1rem;
+          border-radius: 0.3rem;
+
+          &:hover {
+            color: tomato;
+          }
         }
       }
     }
