@@ -8,6 +8,8 @@
   let firstInput = ''
   let secondInput = ''
   let thirdInput = ''
+  let selectedModifier = 'icons'
+  let showIcon = true
 
   onMount(() => {
       firstInput = $navnelapp.firstInput
@@ -70,8 +72,34 @@
         </div>
       </div>
     </div>
-    <div class="actions">
+    <div class="order-actions">
 
+    </div>
+  </div>
+  <div class="modifiers">
+    <div class="modifier-selectors">
+      <div class="icon-selector {selectedModifier === 'icons' ? 'active' : ''}" on:click={() => selectedModifier = 'icons'}>Motiv</div>
+      <div class="background-selector {selectedModifier === 'background' ? 'active' : ''}" on:click={() => selectedModifier = 'background'}>Bakgrunn</div>
+      <div class="font-selector {selectedModifier === 'font' ? 'active' : ''}" on:click={() => selectedModifier = 'font'}>Tekst</div>
+    </div>
+    <div class="modifier-options">
+      {#if selectedModifier === 'icons'}
+        <div class="icons">
+          <label class="switch">
+            <input type="checkbox" bind:checked={showIcon}>
+            <span class="slider">
+              <span class="slide"></span>
+            </span>
+            <span class="switch-text">Motiv av og på</span>
+          </label>
+        </div>
+      {/if}
+      {#if selectedModifier === 'background'}
+        <div class="backgrounds">Backgrounds here</div>
+      {/if}
+      {#if selectedModifier === 'font'}
+        <div class="fonts">Text options here</div>
+      {/if}
     </div>
   </div>
 </section>
@@ -145,6 +173,97 @@
         line-height: 0.9;
         font-weight: 700;
       }
+    }
+  }
+
+  .modifiers {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    .modifier-selectors {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      .icon-selector,
+      .background-selector,
+      .font-selector {
+        padding: 0.7rem;
+        border: 1px solid #ccc;
+        font-size: 1.2rem;
+        cursor: pointer;
+        text-align: center;
+
+        &:hover,
+        &.active {
+          background-color: #ddd;
+        }
+      }
+    }
+
+    .modifier-options {
+      .icons,
+      .backgrounds,
+      .fonts {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+      }
+    }
+  }
+
+  .switch {
+    display: flex;
+    align-items: center;
+
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: relative;
+      display: inline-block;
+      width: 53px;
+      height: 26px;
+      margin-right: .4rem;
+
+      .slide {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+
+        &:before {
+          position: absolute;
+          content: "";
+          height: 20px;
+          width: 20px;
+          left: 4px;
+          bottom: 3px;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    input:checked + .slider .slide {
+      background-color: #2196F3;
+    }
+
+    input:focus + .slider .slide {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider .slide:before {
+      transform: translateX(26px);
     }
   }
 </style>
