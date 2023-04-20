@@ -11,8 +11,8 @@ interface Icon {
 const iconsArray:Icon[] = [
     {
         id: 1,
-        name: 'Beer',
-        path: 'icons/animals/beer.png',
+        name: 'Bear',
+        path: 'icons/animals/bear.svg',
         category: 'animals'
     },
     {
