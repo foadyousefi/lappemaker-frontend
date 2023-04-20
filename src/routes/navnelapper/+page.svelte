@@ -87,9 +87,15 @@
   </div>
   <div class="modifiers">
     <div class="modifier-selectors">
-      <div class="icon-selector {selectedModifier === 'icons' ? 'active' : ''}" on:click={() => selectedModifier = 'icons'}>Motiv</div>
-      <div class="background-selector {selectedModifier === 'background' ? 'active' : ''}" on:click={() => selectedModifier = 'background'}>Bakgrunn</div>
-      <div class="font-selector {selectedModifier === 'font' ? 'active' : ''}" on:click={() => selectedModifier = 'font'}>Tekst</div>
+      <div class="icon-selector {selectedModifier === 'icons' ? 'active' : ''}">
+        <button on:click={() => selectedModifier = 'icons'}>Motiv</button>
+      </div>
+      <div class="background-selector {selectedModifier === 'background' ? 'active' : ''}">
+        <button on:click={() => selectedModifier = 'background'}>Bakgrunn</button>
+      </div>
+      <div class="font-selector {selectedModifier === 'font' ? 'active' : ''}">
+        <button on:click={() => selectedModifier = 'font'}>Tekst</button>
+      </div>
     </div>
     <div class="modifier-options">
       {#if selectedModifier === 'icons'}
@@ -222,14 +228,20 @@
       .icon-selector,
       .background-selector,
       .font-selector {
-        padding: 0.7rem;
-        border: 1px solid #ccc;
-        font-size: 1.2rem;
-        cursor: pointer;
-        text-align: center;
+        button {
+          width: 100%;
+          padding: 0.7rem;
+          border: 1px solid #ccc;
+          font-size: 1.2rem;
+          cursor: pointer;
+          text-align: center;
 
-        &:hover,
-        &.active {
+          &:hover {
+            background-color: #ddd;
+          }
+        }
+
+        &.active button {
           background-color: #ddd;
         }
       }
