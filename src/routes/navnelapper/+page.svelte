@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import navnelapp from '$lib/stores/navnelapp';
   import { icons, selectedIcon } from '$lib/stores/icons';
+  import { backgrounds, selectedBackground } from '$lib/stores/backgrounds';
 
   export let data: PageData;
 
@@ -31,6 +32,10 @@
 
   const selectIcon = (icon) => {
     selectedIcon.set(icon)
+  }
+
+  const selectBackground = (bg) => {
+    selectedBackground.set(bg)
   }
 
 
@@ -124,7 +129,29 @@
         </div>
       {/if}
       {#if selectedModifier === 'background'}
-        <div class="backgrounds">Backgrounds here</div>
+        <div class="backgrounds-section">
+          <div class="section-filters">
+            <div class="background-categories">
+              <div class="all">Alle</div>
+              <div class="animals">Dyr</div>
+              <div class="figures">Figurer</div>
+              <div class="food">Mat</div>
+              <div class="unicorns">Enhjørning</div>
+            </div>
+          </div>
+          <div class="backgrounds">
+            {#each $backgrounds as background}
+              {#if background.category === 'solidColor'}
+                <svg
+                        class="background-option {$selectedBackground.id === background.id ? 'selected' : ''}"
+                        on:click={() => selectBackground(background)}
+                        width="241" height="101" viewBox="0 0 241 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="241" height="101" rx="14" fill={background.value}/>
+                </svg>
+              {/if}
+            {/each}
+          </div>
+        </div>
       {/if}
       {#if selectedModifier === 'font'}
         <div class="fonts">Text options here</div>
@@ -279,16 +306,32 @@
         }
       }
     }
+
+    .backgrounds {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      justify-content: space-between;
+
+      .background-option {
+        max-width: 220px;
+
+      }
+    }
   }
 
-  .icons-section {
+  .icons-section,
+  .backgrounds-section,
+  .fonts-section {
     .section-filters {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 1rem;
 
-      .icon-categories {
+      .icon-categories,
+      .background-categories {
         display: flex;
         gap: 1rem;
         cursor: pointer;
