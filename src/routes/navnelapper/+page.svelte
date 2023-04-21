@@ -161,6 +161,10 @@
 </section>
 
 <style lang="scss">
+  section {
+    --media-border-radius: 10px;
+  }
+
   h1 {
     margin-top: 1rem;
   }
@@ -296,7 +300,7 @@
         object-fit: contain;
         cursor: pointer;
         border: 1px solid #ccc;
-        border-radius: 10px;
+        border-radius: var(--media-border-radius);
         background-color: #eee;
 
         &:hover,
@@ -308,14 +312,23 @@
     }
 
     .backgrounds {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      justify-content: space-between;
+      display: grid;
+      gap: 0.7rem;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 
+      > svg {
+        cursor: pointer;
+
+        &:hover,
+        &.selected {
+          outline: 3px solid lighten(tomato, 10%);
+          border-radius: var(--media-border-radius);
+        }
+      }
+      
       .background-option {
-        max-width: 220px;
+        max-width: 160px;
+        height: auto;
 
       }
     }
@@ -350,7 +363,14 @@
           }
         }
       }
+
     }
+  }
+
+  .backgrounds-section {
+      .section-filters {
+        justify-content: flex-end;
+      }
   }
 
   .switch {
