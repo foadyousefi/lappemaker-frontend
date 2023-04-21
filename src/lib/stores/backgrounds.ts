@@ -66,12 +66,12 @@ const backgroundsArray:Background[] = [
     {
         id: 10,
         name: 'Running',
-        value: 'icons/unicorn/running.svg',
-        category: 'unicorn'
+        value: '$lib/backgrounds/pattern/pink-cloud.jpg',
+        category: 'pattern'
     }
 ]
 const defaultBackground:Background = backgroundsArray[1]
-const selected = browser ? JSON.parse(window.localStorage.getItem('selected_icon')) ?? defaultBackground : defaultBackground;
+const selected = browser ? JSON.parse(window.localStorage.getItem('selected_background')) ?? defaultBackground : defaultBackground;
 const selectedBackground = writable<Background>(selected);
 selectedBackground.subscribe((value:Background) => {
     if (browser) {

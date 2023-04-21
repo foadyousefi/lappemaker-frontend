@@ -69,6 +69,11 @@
       </div>
       <div class="preview">
         <div class="result-image">
+          {#if $selectedBackground && $selectedBackground.category === 'solidColor'}
+            <svg class="background-image" width="300" height="130" viewBox="0 0 300 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="130" fill={$selectedBackground.value}/>
+            </svg>
+          {/if}
           {#if showIcon && $selectedIcon}
             <img src={$selectedIcon.path} alt={$selectedIcon.name}>
           {/if}
@@ -224,6 +229,8 @@
     background: tomato;
     border-radius: 14px;
     aspect-ratio: 30/13;
+    position: relative;
+    isolation: isolate;
 
     .text {
       display: flex;
@@ -237,12 +244,25 @@
       > div {
         line-height: 0.5;
         font-weight: 700;
+        z-index: 1;
       }
     }
 
     img {
       width: 100%;
       height: 100%;
+      z-index: 1;
+    }
+
+    .background-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+      z-index: 0;
     }
   }
 
