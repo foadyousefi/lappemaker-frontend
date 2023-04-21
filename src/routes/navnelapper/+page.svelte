@@ -105,7 +105,13 @@
       </div>
     </div>
     <div class="order-actions">
-
+      <p>
+        Navnelapper som klistres enkelt på klær, sko og utstyr. Tåler 60 graders vask, tørketrommel og oppvaskmaskin.
+      </p>
+      <p>
+        kr 179 per sett 120 stk., 30 x 13 mm
+      </p>
+      <button class="add-to-cart">Leggg i handlekurv</button>
     </div>
   </div>
   <div class="modifiers">
@@ -181,7 +187,7 @@
           <h2>Velg en font</h2>
           <div class="fonts">
             {#each $fonts as font}
-              <div class="result-image" style="font-family:{font.family};color:{$selectedColor}" on:click={() => selectFont(font)}>
+              <div class="result-image {$selectedFont.id === font.id ? 'selected' : ''}" style="font-family:{font.family};color:{$selectedColor}" on:click={() => selectFont(font)}>
                 {#if $selectedBackground}
                   {#if $selectedBackground.category === 'solidColor'}
                     <svg class="background-image" width="300" height="130" viewBox="0 0 300 130" fill="none" xmlns="http://www.w3.org/2000/svg">
