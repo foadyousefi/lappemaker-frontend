@@ -111,7 +111,7 @@
       <p>
         kr 179 per sett 120 stk., 30 x 13 mm
       </p>
-      <button class="add-to-cart">Leggg i handlekurv</button>
+      <button class="add-to-cart">Legg i handlekurv</button>
     </div>
   </div>
   <div class="modifiers">
