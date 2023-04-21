@@ -68,11 +68,15 @@
         </div>
       </div>
       <div class="preview">
-        <div class="result-image">
-          {#if $selectedBackground && $selectedBackground.category === 'solidColor'}
-            <svg class="background-image" width="300" height="130" viewBox="0 0 300 130" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="130" fill={$selectedBackground.value}/>
-            </svg>
+        <div class="result-image {$selectedBackground.theme === 'dark' ? 'dark' : 'light'}">
+          {#if $selectedBackground}
+            {#if $selectedBackground.category === 'solidColor'}
+              <svg class="background-image" width="300" height="130" viewBox="0 0 300 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="300" height="130" fill={$selectedBackground.value}/>
+              </svg>
+            {:else}
+              <img class="background-image" src={$selectedBackground.value} alt={$selectedBackground.name}>
+            {/if}
           {/if}
           {#if showIcon && $selectedIcon}
             <img src={$selectedIcon.path} alt={$selectedIcon.name}>
@@ -153,6 +157,11 @@
                         width="241" height="101" viewBox="0 0 241 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="241" height="101" rx="14" fill={background.value}/>
                 </svg>
+              {:else}
+                <img
+                        class="background-option {$selectedBackground.id === background.id ? 'selected' : ''}"
+                        on:click={() => selectBackground(background)}
+                        src={background.value} alt={background.name}>
               {/if}
             {/each}
           </div>
@@ -248,6 +257,14 @@
       }
     }
 
+    &.dark {
+      .text {
+        > div {
+          color: var(--color-text-light);
+        }
+      }
+    }
+
     img {
       width: 100%;
       height: 100%;
@@ -336,7 +353,8 @@
       gap: 0.7rem;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 
-      > svg {
+      > svg,
+      > img {
         cursor: pointer;
 
         &:hover,
@@ -349,7 +367,8 @@
       .background-option {
         max-width: 160px;
         height: auto;
-
+        aspect-ratio: 30/13;
+        border-radius: var(--media-border-radius);
       }
     }
   }
