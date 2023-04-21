@@ -4,6 +4,7 @@
   import navnelapp from '$lib/stores/navnelapp';
   import { icons, selectedIcon } from '$lib/stores/icons';
   import { backgrounds, selectedBackground } from '$lib/stores/backgrounds';
+  import { fonts, selectedFont, colors, selectedColor } from '$lib/stores/fonts';
 
   export let data: PageData;
 
@@ -38,6 +39,14 @@
     selectedBackground.set(bg)
   }
 
+  const selectFont = (font) => {
+    selectedFont.set(font)
+  }
+
+  const selectColor = (color) => {
+    selectedColor.set(color)
+  }
+
 
 </script>
 
@@ -68,7 +77,7 @@
         </div>
       </div>
       <div class="preview">
-        <div class="result-image {$selectedBackground.theme === 'dark' ? 'dark' : 'light'}">
+        <div class="result-image" style="font-family: {$selectedFont.family};color:{$selectedColor}">
           {#if $selectedBackground}
             {#if $selectedBackground.category === 'solidColor'}
               <svg class="background-image" width="300" height="130" viewBox="0 0 300 130" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -168,7 +177,44 @@
         </div>
       {/if}
       {#if selectedModifier === 'font'}
-        <div class="fonts">Text options here</div>
+        <div class="fonts-section">
+          <h2>Velg en font</h2>
+          <div class="fonts">
+            {#each $fonts as font}
+              <div class="result-image" style="font-family:{font.family};color:{$selectedColor}" on:click={() => selectFont(font)}>
+                {#if $selectedBackground}
+                  {#if $selectedBackground.category === 'solidColor'}
+                    <svg class="background-image" width="300" height="130" viewBox="0 0 300 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="300" height="130" fill={$selectedBackground.value}/>
+                    </svg>
+                  {:else}
+                    <img class="background-image" src={$selectedBackground.value} alt={$selectedBackground.name}>
+                  {/if}
+                {/if}
+                {#if showIcon && $selectedIcon}
+                  <img src={$selectedIcon.path} alt={$selectedIcon.name}>
+                {/if}
+                <div class="text">
+                  {#if firstInput.length}
+                    <div class="first" style="font-size: {firstFont / 1.2}px;">{firstInput}</div>
+                  {/if}
+                  {#if secondInput.length}
+                    <div class="second" style="font-size: {secondFont / 1.2}px;">{secondInput}</div>
+                  {/if}
+                  {#if thirdInput.length}
+                    <div class="third" style="font-size: {thirdFont / 1.2}px;">{thirdInput}</div>
+                  {/if}
+                </div>
+              </div>
+            {/each}
+          </div>
+          <h2>Velg tekst farge</h2>
+          <div class="font-colors">
+            {#each $colors as color}
+              <div class="color-option {$selectedColor === color ? 'selected' : ''}" style="background-color: {color}" on:click={() => selectColor(color)}></div>
+            {/each}
+          </div>
+        </div>
       {/if}
     </div>
   </div>
@@ -254,14 +300,6 @@
         line-height: 0.5;
         font-weight: 700;
         z-index: 1;
-      }
-    }
-
-    &.dark {
-      .text {
-        > div {
-          color: var(--color-text-light);
-        }
       }
     }
 
@@ -374,8 +412,7 @@
   }
 
   .icons-section,
-  .backgrounds-section,
-  .fonts-section {
+  .backgrounds-section {
     .section-filters {
       display: flex;
       align-items: center;
@@ -410,6 +447,43 @@
       .section-filters {
         justify-content: flex-end;
       }
+  }
+
+  .fonts-section {
+    .fonts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+
+      .result-image {
+        cursor: pointer;
+
+        &:hover,
+        &.selected {
+          outline: 3px solid lighten(tomato, 10%);
+          border-radius: var(--media-border-radius);
+        }
+      }
+    }
+
+    .font-colors {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+
+      .color-option {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover,
+        &.selected {
+          outline: 3px solid lighten(tomato, 10%);
+        }
+      }
+    }
   }
 
   .switch {
