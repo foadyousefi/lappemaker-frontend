@@ -157,8 +157,8 @@
                   <svg
                           class="background-option {$selectedBackground.id === background.id ? 'selected' : ''}"
                           on:click={() => selectBackground(background)}
-                          width="241" height="101" viewBox="0 0 241 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="241" height="101" rx="14" fill={background.value}/>
+                          width="160" height="69.33" viewBox="0 0 160 69.33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="160" height="69.33" rx="9" fill={background.value}/>
                   </svg>
                 {:else}
                   <img
