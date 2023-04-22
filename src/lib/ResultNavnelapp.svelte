@@ -20,7 +20,11 @@
 
 </script>
 
-<div class="result-image {isFonts ? 'is-fonts' : ''} {$selectedFont.family === fontFamily.family ? 'selected' : ''}" style="font-family:{fontFamily.family};color:{$selectedColor}" on:click={() => selectFont(fontFamily)}>
+<div class="result-image
+            {showIcon ? 'show-icon' : ''}
+            {isFonts ? 'is-fonts' : ''}
+            {$selectedFont.family === fontFamily.family ? 'selected' : ''}"
+     style="font-family:{fontFamily.family};color:{$selectedColor}" on:click={() => selectFont(fontFamily)}>
   {#if $selectedBackground}
     {#if $selectedBackground.category === 'solidColor'}
       <svg class="background-image" width="300" height="130" viewBox="0 0 300 130" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +54,7 @@
 
   .result-image {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr;
     align-items: center;
     width: 100%;
     height: 100%;
@@ -59,6 +63,10 @@
     aspect-ratio: 30/13;
     position: relative;
     isolation: isolate;
+
+    &.show-icon {
+      grid-template-columns: 1fr 2fr;
+    }
 
     .text {
       display: flex;
