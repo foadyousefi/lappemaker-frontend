@@ -11,7 +11,7 @@
   export let secondFont
   export let thirdFont
   export let fontFamily
-  export let isFonts
+  export let isFonts = false
 
   const dispatch = createEventDispatcher()
   const selectFont = (font) => {
