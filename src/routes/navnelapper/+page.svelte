@@ -132,7 +132,9 @@
           </div>
           <div class="icons">
             {#each $icons as icon}
-              <img class="{$selectedIcon.id === icon.id ? 'selected' : ''}" src={icon.path} alt={icon.name} on:click={() => selectIcon(icon)}>
+              {#if selectedIconCategory === 'all' || icon.category === selectedIconCategory}
+                <img class="{$selectedIcon.id === icon.id ? 'selected' : ''}" src={icon.path} alt={icon.name} on:click={() => selectIcon(icon)}>
+              {/if}
             {/each}
           </div>
         </div>
@@ -150,18 +152,20 @@
           </div>
           <div class="backgrounds">
             {#each $backgrounds as background}
-              {#if background.category === 'solidColor'}
-                <svg
-                        class="background-option {$selectedBackground.id === background.id ? 'selected' : ''}"
-                        on:click={() => selectBackground(background)}
-                        width="241" height="101" viewBox="0 0 241 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="241" height="101" rx="14" fill={background.value}/>
-                </svg>
-              {:else}
-                <img
-                        class="background-option {$selectedBackground.id === background.id ? 'selected' : ''}"
-                        on:click={() => selectBackground(background)}
-                        src={background.value} alt={background.name}>
+              {#if selectedBackgroundCategory === 'all' || background.category === selectedBackgroundCategory}
+                {#if background.category === 'solidColor'}
+                  <svg
+                          class="background-option {$selectedBackground.id === background.id ? 'selected' : ''}"
+                          on:click={() => selectBackground(background)}
+                          width="241" height="101" viewBox="0 0 241 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="241" height="101" rx="14" fill={background.value}/>
+                  </svg>
+                {:else}
+                  <img
+                          class="background-option {$selectedBackground.id === background.id ? 'selected' : ''}"
+                          on:click={() => selectBackground(background)}
+                          src={background.value} alt={background.name}>
+                {/if}
               {/if}
             {/each}
           </div>

@@ -116,12 +116,12 @@ const categories:Category[] = [
         name: 'Alle'
     },
     {
-        id: 'animals',
-        name: 'Dyr'
+        id: 'solidColor',
+        name: 'Ren farge'
     },
     {
-        id: 'figures',
-        name: 'Figurer'
+        id: 'pattern',
+        name: 'Mønster'
     }
 ]
 const backgroundCategories = readable<Category[]>(categories, set => {
