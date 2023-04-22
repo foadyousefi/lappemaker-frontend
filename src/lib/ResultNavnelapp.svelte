@@ -1,7 +1,8 @@
 <script>
-  import { icons, selectedIcon } from '$lib/stores/icons';
-  import { backgrounds, selectedBackground } from '$lib/stores/backgrounds';
-  import { fonts, selectedFont, colors, selectedColor } from '$lib/stores/fonts';
+  import { createEventDispatcher } from 'svelte';
+  import { selectedIcon } from '$lib/stores/icons';
+  import { selectedBackground } from '$lib/stores/backgrounds';
+  import { selectedFont, selectedColor } from '$lib/stores/fonts';
   export let showIcon
   export let firstInput
   export let secondInput
@@ -9,10 +10,17 @@
   export let firstFont
   export let secondFont
   export let thirdFont
+  export let fontFamily
+  export let isFonts
+
+  const dispatch = createEventDispatcher()
+  const selectFont = (font) => {
+    dispatch('selectFont', font)
+  }
 
 </script>
 
-<div class="result-image" style="font-family: {$selectedFont.family};color:{$selectedColor}">
+<div class="result-image {isFonts ? 'is-fonts' : ''} {$selectedFont.family === fontFamily.family ? 'selected' : ''}" style="font-family:{fontFamily.family};color:{$selectedColor}" on:click={() => selectFont(fontFamily)}>
   {#if $selectedBackground}
     {#if $selectedBackground.category === 'solidColor'}
       <svg class="background-image" width="300" height="130" viewBox="0 0 300 130" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -83,6 +91,16 @@
       object-fit: cover;
       border-radius: 14px;
       z-index: 0;
+    }
+
+    &.is-fonts {
+      cursor: pointer;
+
+      &:hover,
+      &.selected {
+        outline: 3px solid lighten(tomato, 10%);
+        border-radius: var(--media-border-radius);
+      }
     }
   }
 </style>

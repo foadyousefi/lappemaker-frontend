@@ -78,7 +78,7 @@
         </div>
       </div>
       <div class="preview">
-        <ResultNavnelapp {showIcon} {firstInput} {secondInput} {thirdInput} {firstFont} {secondFont} {thirdFont} />
+        <ResultNavnelapp {showIcon} {firstInput} {secondInput} {thirdInput} {firstFont} {secondFont} {thirdFont} fontFamily={$selectedFont} />
       </div>
     </div>
     <div class="order-actions">
@@ -164,7 +164,7 @@
           <h2>Velg en font</h2>
           <div class="fonts">
             {#each $fonts as font}
-              <ResultNavnelapp {showIcon} {firstInput} {secondInput} {thirdInput} {firstFont} {secondFont} {thirdFont} on:click={() => selectedFont(font)} />
+              <ResultNavnelapp {showIcon} {firstInput} {secondInput} {thirdInput} firstFont={firstFont / 1.3} secondFont={secondFont / 1.3} thirdFont={thirdFont / 1.3} fontFamily={font} isFonts on:selectFont={() => selectFont(font)} />
             {/each}
           </div>
           <h2>Velg tekst farge</h2>
@@ -368,16 +368,6 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
-
-      .result-image {
-        cursor: pointer;
-
-        &:hover,
-        &.selected {
-          outline: 3px solid lighten(tomato, 10%);
-          border-radius: var(--media-border-radius);
-        }
-      }
     }
 
     .font-colors {
