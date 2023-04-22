@@ -106,4 +106,25 @@ selectedBackground.subscribe((value:Background) => {
 const backgrounds = readable<Background[]>(backgroundsArray, set => {
     set(backgroundsArray);
 });
-export { backgrounds, selectedBackground };
+interface Category {
+    id: string;
+    name: string;
+}
+const categories:Category[] = [
+    {
+        id: 'all',
+        name: 'Alle'
+    },
+    {
+        id: 'animals',
+        name: 'Dyr'
+    },
+    {
+        id: 'figures',
+        name: 'Figurer'
+    }
+]
+const backgroundCategories = readable<Category[]>(categories, set => {
+    set(categories);
+})
+export { backgrounds, selectedBackground, backgroundCategories };

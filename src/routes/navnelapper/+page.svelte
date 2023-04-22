@@ -3,8 +3,8 @@
   import { onMount } from 'svelte';
   import navnelapp from '$lib/stores/navnelapp';
   import ResultNavnelapp from '$lib/ResultNavnelapp.svelte';
-  import { icons, selectedIcon } from '$lib/stores/icons';
-  import { backgrounds, selectedBackground } from '$lib/stores/backgrounds';
+  import { icons, selectedIcon, iconCategories } from '$lib/stores/icons';
+  import { backgrounds, selectedBackground, backgroundCategories } from '$lib/stores/backgrounds';
   import { fonts, selectedFont, colors, selectedColor } from '$lib/stores/fonts';
 
   export let data: PageData;
@@ -14,6 +14,8 @@
   let thirdInput = ''
   let selectedModifier = 'icons'
   let showIcon = true
+  let selectedIconCategory = 'all'
+  let selectedBackgroundCategory = 'all'
 
   onMount(() => {
       firstInput = $navnelapp.firstInput
@@ -46,6 +48,14 @@
 
   const selectColor = (color) => {
     selectedColor.set(color)
+  }
+
+  const selectIconCategory = (category) => {
+    selectedIconCategory = category
+  }
+
+  const selectBackgroundCategory = (category) => {
+    selectedBackgroundCategory = category
   }
 
 
@@ -115,11 +125,9 @@
               <span class="switch-text">Motiv av og på</span>
             </label>
             <div class="icon-categories">
-              <div class="all">Alle</div>
-              <div class="animals">Dyr</div>
-              <div class="figures">Figurer</div>
-              <div class="food">Mat</div>
-              <div class="unicorns">Enhjørning</div>
+              {#each $iconCategories as cat}
+                <button class="{selectedIconCategory === cat.id ? 'selected' : ''}" on:click={() => selectIconCategory(cat.id)}>{cat.name}</button>
+              {/each}
             </div>
           </div>
           <div class="icons">
@@ -133,11 +141,11 @@
         <div class="backgrounds-section">
           <div class="section-filters">
             <div class="background-categories">
-              <div class="all">Alle</div>
-              <div class="animals">Dyr</div>
-              <div class="figures">Figurer</div>
-              <div class="food">Mat</div>
-              <div class="unicorns">Enhjørning</div>
+              {#each $backgroundCategories as bgCat}
+                <button
+                        class="{selectedBackgroundCategory === bgCat.id ? 'selected' : ''}"
+                        on:click={() => selectBackgroundCategory(bgCat.id)}>{bgCat.name}</button>
+              {/each}
             </div>
           </div>
           <div class="backgrounds">
@@ -337,19 +345,17 @@
       .background-categories {
         display: flex;
         gap: 1rem;
-        cursor: pointer;
 
-        .all,
-        .animals,
-        .figures,
-        .food,
-        .unicorns {
-          border: 1px solid red;
+        button {
+          cursor: pointer;
+          border: 1px solid #aaa;
           padding: 0.3rem 1rem;
           border-radius: 0.3rem;
 
-          &:hover {
+          &:hover,
+          &.selected {
             color: tomato;
+            border: 1px solid tomato;
           }
         }
       }

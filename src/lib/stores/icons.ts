@@ -78,8 +78,37 @@ selectedIcon.subscribe((value:Icon) => {
         window.localStorage.setItem('selected_icon', JSON.stringify(value));
     }
 });
-
 const icons = readable<Icon[]>(iconsArray, set => {
     set(iconsArray);
 });
-export { icons, selectedIcon };
+interface Category {
+    id: string;
+    name: string;
+}
+const categories:Category[] = [
+    {
+        id: 'all',
+        name: 'Alle'
+    },
+    {
+        id: 'animals',
+        name: 'Dyr'
+    },
+    {
+        id: 'figures',
+        name: 'Figurer'
+    },
+    {
+        id: 'food',
+        name: 'Mat'
+    },
+    {
+        id: 'unicorn',
+        name: 'Enhjørninger'
+    }
+]
+const iconCategories = readable<Category[]>(categories, set => {
+    set(categories);
+})
+
+export { icons, selectedIcon, iconCategories };
