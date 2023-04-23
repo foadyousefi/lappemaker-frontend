@@ -2,6 +2,7 @@
   import type { PageData } from './$types';
   import { onMount } from 'svelte';
   import navnelapp from '$lib/stores/navnelapp';
+  import CanvasNavnelapp from '$lib/CanvasNavnelapp.svelte';
   import ResultNavnelapp from '$lib/ResultNavnelapp.svelte';
   import { icons, selectedIcon, iconCategories } from '$lib/stores/icons';
   import { backgrounds, selectedBackground, backgroundCategories } from '$lib/stores/backgrounds';
@@ -25,8 +26,8 @@
   })
 
   $: inputsFilled = (firstInput.length > 0) + (secondInput.length > 0) + (thirdInput.length > 0)
-  $: maxFontSize = 70 - ((inputsFilled - 1) * 3)
-  $: firstFont = maxFontSize - firstInput.length * 2.4
+  $: maxFontSize = 100 - ((inputsFilled - 1) * 3)
+  $: firstFont = maxFontSize - firstInput.length * 3.2
   $: secondFont = maxFontSize - secondInput.length * 2.4
   $: thirdFont = maxFontSize - thirdInput.length * 2.4
 
@@ -56,6 +57,10 @@
 
   const selectBackgroundCategory = (category) => {
     selectedBackgroundCategory = category
+  }
+
+  const stringId = (id) => {
+      return id === 0 ? 'one' : id === 1 ? 'two' : id === 2 ? 'three' : 'four'
   }
 
 
@@ -88,7 +93,7 @@
         </div>
       </div>
       <div class="preview">
-        <ResultNavnelapp {showIcon} {firstInput} {secondInput} {thirdInput} {firstFont} {secondFont} {thirdFont} fontFamily={$selectedFont} />
+        <CanvasNavnelapp {showIcon} {firstInput} {secondInput} {thirdInput} index="top" fontFamily={$selectedFont} />
       </div>
     </div>
     <div class="order-actions">
@@ -175,8 +180,8 @@
         <div class="fonts-section">
           <h2>Velg en font</h2>
           <div class="fonts">
-            {#each $fonts as font}
-              <ResultNavnelapp {showIcon} {firstInput} {secondInput} {thirdInput} firstFont={firstFont / 1.3} secondFont={secondFont / 1.3} thirdFont={thirdFont / 1.3} fontFamily={font} isFonts on:selectFont={() => selectFont(font)} />
+            {#each $fonts as font, i}
+              <CanvasNavnelapp {showIcon} {firstInput} {secondInput} {thirdInput} index={stringId(i)} fontFamily={font} isFonts on:selectFont={() => selectFont(font)} />
             {/each}
           </div>
           <h2>Velg tekst farge</h2>
