@@ -14,6 +14,7 @@ interface Item {
     firstInput: string;
     secondInput: string;
     thirdInput: string;
+    design: string;
 }
 
 const storeCart = browser ? window.localStorage.getItem('cart_items') : null;

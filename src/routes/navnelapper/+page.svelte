@@ -80,6 +80,7 @@
       firstInput,
       secondInput,
       thirdInput,
+      design: document.getElementById('resultImageCanvastop').toDataURL('image/png')
     }
     cartItems.update(items => items ? [...items, cartItem] : [cartItem])
   }
