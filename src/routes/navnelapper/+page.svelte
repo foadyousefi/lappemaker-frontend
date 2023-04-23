@@ -3,10 +3,10 @@
   import { onMount } from 'svelte';
   import navnelapp from '$lib/stores/navnelapp';
   import CanvasNavnelapp from '$lib/CanvasNavnelapp.svelte';
-  import ResultNavnelapp from '$lib/ResultNavnelapp.svelte';
   import { icons, selectedIcon, iconCategories } from '$lib/stores/icons';
   import { backgrounds, selectedBackground, backgroundCategories } from '$lib/stores/backgrounds';
   import { fonts, selectedFont, colors, selectedColor } from '$lib/stores/fonts';
+  import { cartItems } from '$lib/stores/cartItems';
 
   export let data: PageData;
 
@@ -17,12 +17,16 @@
   let showIcon = true
   let selectedIconCategory = 'all'
   let selectedBackgroundCategory = 'all'
+  let price = 120
 
   onMount(() => {
       firstInput = $navnelapp.firstInput
       secondInput = $navnelapp.secondInput
       thirdInput = $navnelapp.thirdInput
       showIcon = $navnelapp.showIcon
+      if (data && data.price) {
+        price = data.price
+      }
   })
 
   $: inputsFilled = (firstInput.length > 0) + (secondInput.length > 0) + (thirdInput.length > 0)
@@ -60,9 +64,25 @@
   }
 
   const stringId = (id) => {
-      return id === 0 ? 'one' : id === 1 ? 'two' : id === 2 ? 'three' : 'four'
+    return id === 0 ? 'one' : id === 1 ? 'two' : id === 2 ? 'three' : 'four'
   }
 
+  const addToCart = () => {
+    const cartItem = {
+      productId: data.id,
+      title: data.title,
+      fontFamily: $selectedFont.family,
+      color: $selectedColor,
+      background: $selectedBackground,
+      icon: $selectedIcon,
+      price: data.price,
+      quantity: 1,
+      firstInput,
+      secondInput,
+      thirdInput,
+    }
+    cartItems.update(items => items ? [...items, cartItem] : [cartItem])
+  }
 
 </script>
 
@@ -97,13 +117,14 @@
       </div>
     </div>
     <div class="order-actions">
-      <p>
-        Navnelapper som klistres enkelt på klær, sko og utstyr. Tåler 60 graders vask, tørketrommel og oppvaskmaskin.
-      </p>
-      <p>
-        kr 179 per sett 120 stk., 30 x 13 mm
-      </p>
-      <button class="add-to-cart">Legg i handlekurv</button>
+      <p>Navnelapper som klistres enkelt på klær, sko og utstyr. Tåler 60 graders vask, tørketrommel og oppvaskmaskin.</p>
+      <p>kr {price} per sett 120 stk, 30x13mm</p>
+      <button class="add-to-cart" on:click={addToCart}>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.95238 15.873C4.86111 15.873 3.97817 16.7659 3.97817 17.8571C3.97817 18.9484 4.86111 19.8413 5.95238 19.8413C7.04365 19.8413 7.93651 18.9484 7.93651 17.8571C7.93651 16.7659 7.04365 15.873 5.95238 15.873ZM15.873 15.873C14.7817 15.873 13.8988 16.7659 13.8988 17.8571C13.8988 18.9484 14.7817 19.8413 15.873 19.8413C16.9643 19.8413 17.8571 18.9484 17.8571 17.8571C17.8571 16.7659 16.9643 15.873 15.873 15.873ZM6.12103 12.6488L6.15079 12.5298L7.04365 10.9127H14.4345C15.1786 10.9127 15.8333 10.506 16.1706 9.89087L20 2.93651L18.2738 1.98413H18.2639L17.1726 3.96825L14.4345 8.92857H7.47024L7.34127 8.66071L5.11905 3.96825L4.17659 1.98413L3.24405 0H0V1.98413H1.98413L5.55556 9.51389L4.21627 11.9444C4.05754 12.2222 3.96825 12.5496 3.96825 12.8968C3.96825 13.9881 4.86111 14.881 5.95238 14.881H17.8571V12.8968H6.36905C6.24008 12.8968 6.12103 12.7877 6.12103 12.6488Z" fill="white"/>
+        </svg>
+        <span>Legg i handlekurv</span>
+      </button>
     </div>
   </div>
   <div class="modifiers">
