@@ -20,24 +20,24 @@
 
 @font-face {
 	font-family: 'Quicksand';
-	src: url('/fonts/quicksand/quicksand.woff2') format('woff2-variations');
 	src: url('/fonts/quicksand/quicksand.ttf') format('truetype');
+	src: url('/fonts/quicksand/quicksand.woff2') format('woff2-variations');
 	font-weight: 125 950;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'RedHatDisplay';
-	src: url('/fonts/red-har-display/RedHatDisplay.woff2') format('woff2-variations');
 	src: url('/fonts/red-har-display/RedHatDisplay.ttf') format('truetype');
+	src: url('/fonts/red-har-display/RedHatDisplay.woff2') format('woff2-variations');
 	font-weight: 125 950;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'IndieFlower';
-	src: url('/fonts/IndieFlower/IndieFlower-Regular.woff2') format('woff2-variations');
 	src: url('/fonts/IndieFlower/IndieFlower-Regular.ttf') format('truetype');
+	src: url('/fonts/IndieFlower/IndieFlower-Regular.woff2') format('woff2-variations');
 	font-weight: 125 950;
 	font-style: normal;
 }
