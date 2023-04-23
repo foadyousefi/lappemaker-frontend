@@ -70,7 +70,7 @@
   const addToCart = () => {
     const cartItem = {
       productId: data.id,
-      title: data.title,
+      title: data.name,
       fontFamily: $selectedFont.family,
       color: $selectedColor,
       background: $selectedBackground,
