@@ -10,6 +10,85 @@
   </svg>
   <span class="cart-count">{cartCount}</span>
 </div>
+<aside class="sidebar-minicart">
+  <div class="">
+    <header class="">
+      <button class="close-minicart">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 0C4.47656 0 0 4.47656 0 10C0 15.5234 4.47656 20 10 20C15.5234 20 20 15.5234 20 10C20 4.47656 15.5234 0 10 0ZM14.0078 10.8828L9.63281 15.2578C9.14453 15.7461 8.35352 15.7461 7.86523 15.2578C7.37695 14.7695 7.37695 13.9785 7.86523 13.4902L11.3594 10L7.86719 6.50781C7.37891 6.01953 7.37891 5.22852 7.86719 4.74023C8.35547 4.25195 9.14648 4.25195 9.63476 4.74023L14.0098 9.11523C14.2539 9.35938 14.375 9.67969 14.375 10C14.375 10.3203 14.2539 10.6406 14.0078 10.8828Z" fill="#abc"/>
+        </svg>
+      </button>
+      <h2>Handlekurv</h2>
+    </header>
+    <div class="">
+      {#each $cartItems as item}
+        <article class="">
+          <img class="designed-file" src="{item.design}" alt="" loading="lazy">
+          <div class="">
+            <div class="flex gap-2 justify-between items-start">
+              <strong>{item.title}</strong>
+              <button class="">
+                <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.08929 1.86711L5.41071 2.89474H10.5893L9.91071 1.86711C9.85714 1.7875 9.76786 1.73684 9.67143 1.73684H6.325C6.22857 1.73684 6.13929 1.78388 6.08571 1.86711H6.08929ZM11.3393 0.904605L12.65 2.89474H13.1429H14.8571H15.1429C15.6179 2.89474 16 3.28191 16 3.76316C16 4.24441 15.6179 4.63158 15.1429 4.63158H14.8571V15.6316C14.8571 17.2309 13.5786 18.5263 12 18.5263H4C2.42143 18.5263 1.14286 17.2309 1.14286 15.6316V4.63158H0.857143C0.382143 4.63158 0 4.24441 0 3.76316C0 3.28191 0.382143 2.89474 0.857143 2.89474H1.14286H2.85714H3.35L4.66071 0.900987C5.03214 0.340132 5.65714 0 6.325 0H9.67143C10.3393 0 10.9643 0.340132 11.3357 0.900987L11.3393 0.904605ZM2.85714 4.63158V15.6316C2.85714 16.272 3.36786 16.7895 4 16.7895H12C12.6321 16.7895 13.1429 16.272 13.1429 15.6316V4.63158H2.85714ZM5.71429 6.94737V14.4737C5.71429 14.7921 5.45714 15.0526 5.14286 15.0526C4.82857 15.0526 4.57143 14.7921 4.57143 14.4737V6.94737C4.57143 6.62895 4.82857 6.36842 5.14286 6.36842C5.45714 6.36842 5.71429 6.62895 5.71429 6.94737ZM8.57143 6.94737V14.4737C8.57143 14.7921 8.31429 15.0526 8 15.0526C7.68571 15.0526 7.42857 14.7921 7.42857 14.4737V6.94737C7.42857 6.62895 7.68571 6.36842 8 6.36842C8.31429 6.36842 8.57143 6.62895 8.57143 6.94737ZM11.4286 6.94737V14.4737C11.4286 14.7921 11.1714 15.0526 10.8571 15.0526C10.5429 15.0526 10.2857 14.7921 10.2857 14.4737V6.94737C10.2857 6.62895 10.5429 6.36842 10.8571 6.36842C11.1714 6.36842 11.4286 6.62895 11.4286 6.94737Z" fill="black"/>
+                </svg>
+              </button>
+            </div>
+            <div class="">
+              <div>
+                <div class="">
+                  <button disabled="" class="">
+                    <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="">
+                      <path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
+                    </svg>
+                  </button>
+                  <div size="sm" role="textbox" aria-label="Antall produkter" class="text-center min-w-[8px] px-1 leading-none flex-1 text-sm">1</div>
+                  <button aria-label="Endre antall til 2" class="btn min-w-[var(--btn-size-sm)] text-sm px-0 btn-light btn-sm rounded-full">
+                    <i class="inline-flex self-center relative h-[1em] w-[1em]">
+                      <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-[1em] w-[1em] !m-0">
+                        <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
+                      </svg>
+                    </i>
+                  </button>
+                </div>
+              </div>
+              <strong>
+                <span>kr&nbsp;179,00</span>
+              </strong>
+            </div>
+          </div>
+        </article>
+      {/each}
+    </div>
+    <footer class="px-4 pb-2.5 border-t-2 border-gray-300">
+      <div class="pt-2 text-sm mb-5">
+        <div class="mb-1">
+          <div class="flex">
+            <span class="flex-1">Pris</span>
+            <span>kr&nbsp;358,00</span>
+          </div>
+        </div>
+        <div class="mb-1 font-bold">
+          <div class="flex">
+            <span class="flex-1">Frakt</span>
+            <span>kr&nbsp;0,00</span>
+          </div>
+        </div>
+        <div class="mb-1 font-bold pt-1 mt-1 border-t border-gray-300">
+          <div class="flex">
+            <span class="flex-1">Totalt</span>
+            <span>kr&nbsp;358,00</span>
+          </div>
+        </div>
+        <div class="mb-1 text-xs">
+          <div class="flex">
+            <span class="flex-1">Inkludert MVA</span>
+          </div>
+        </div>
+      </div>
+      <a href="/handlekurv" class="btn btn-primary rounded-full flex w-full">Til kasse</a>
+    </footer>
+  </div>
+</aside>
 
 <style lang="scss">
   svg.cart {
@@ -43,6 +122,50 @@
       height: 20px;
       line-height: 20px;
       text-align: center;
+    }
+  }
+
+  .sidebar-minicart {
+    --minicart-background: #FFF;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    background-color: var(--minicart-background);
+    padding: 1rem;
+
+    header {
+      h2 {
+        font-size: 1.7rem;
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+
+      .close-minicart {
+        position: absolute;
+        top: 31px;
+        left: -30px;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        line-height: 1;
+        padding: 7px;
+        background-color: var(--minicart-background);
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: translateX(3px);
+        }
+      }
+    }
+
+    article {
+      margin-top: 1rem;
+    }
+
+    .designed-file {
+      border-radius: 9px;
     }
   }
 </style>
