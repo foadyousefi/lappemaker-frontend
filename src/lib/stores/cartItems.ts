@@ -3,6 +3,7 @@ import { writable, readable } from 'svelte/store';
 import { isJsonString } from "$lib/functions";
 
 interface Item {
+    id: string;
     productId: number;
     title: string;
     fontFamily: string;
