@@ -134,7 +134,8 @@ button:focus:not(:focus-visible) {
 	margin-top: 0;
 }
 
-.order-actions .add-to-cart {
+.order-actions .add-to-cart,
+.btn {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
