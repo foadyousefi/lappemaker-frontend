@@ -28,5 +28,7 @@ cartItems.subscribe((value:Item[]) => {
     }
 });
 
+const minicartOpen = writable<boolean>(false);
+minicartOpen.subscribe((value:boolean) => value);
 
-export { cartItems };
+export { cartItems, minicartOpen };

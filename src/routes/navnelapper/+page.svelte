@@ -6,7 +6,7 @@
   import { icons, selectedIcon, iconCategories } from '$lib/stores/icons';
   import { backgrounds, selectedBackground, backgroundCategories } from '$lib/stores/backgrounds';
   import { fonts, selectedFont, colors, selectedColor } from '$lib/stores/fonts';
-  import { cartItems } from '$lib/stores/cartItems';
+  import { cartItems, minicartOpen } from '$lib/stores/cartItems';
 
   export let data: PageData;
 
@@ -92,6 +92,7 @@
       design: document.getElementById('resultImageCanvastop').toDataURL('image/png')
     }
     cartItems.update(items => items ? [...items, cartItem] : [cartItem])
+    minicartOpen.set(true)
   }
 
 </script>
