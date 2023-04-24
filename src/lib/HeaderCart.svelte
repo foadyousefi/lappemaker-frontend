@@ -2,6 +2,28 @@
   import { cartItems } from "$lib/stores/cartItems";
 
   $: cartCount = $cartItems ? $cartItems.length : 0;
+
+  const removeProduct = (id) => {
+    cartItems.update(items => items.filter(item => item.id !== id));
+  }
+
+  const increaseQuantity = (id) => {
+    cartItems.update(items => items.map(item => {
+      if (item.id === id) {
+        item.quantity++
+      }
+      return item
+    }));
+  }
+
+  const reduceQuantity = (id) => {
+    cartItems.update(items => items.map(item => {
+      if (item.id === id) {
+        item.quantity--
+      }
+      return item
+    }));
+  }
 </script>
 
 <div class="header-cart">
@@ -22,37 +44,33 @@
     </header>
     <div class="">
       {#each $cartItems as item}
-        <article class="">
+        <article>
           <img class="designed-file" src="{item.design}" alt="" loading="lazy">
-          <div class="">
-            <div class="flex gap-2 justify-between items-start">
-              <strong>{item.title}</strong>
-              <button class="">
+          <div class="product-body">
+            <div class="product-header">
+              <h3>{item.title}</h3>
+              <button class="remove-product" on:click={() => removeProduct(item.id)}>
                 <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.08929 1.86711L5.41071 2.89474H10.5893L9.91071 1.86711C9.85714 1.7875 9.76786 1.73684 9.67143 1.73684H6.325C6.22857 1.73684 6.13929 1.78388 6.08571 1.86711H6.08929ZM11.3393 0.904605L12.65 2.89474H13.1429H14.8571H15.1429C15.6179 2.89474 16 3.28191 16 3.76316C16 4.24441 15.6179 4.63158 15.1429 4.63158H14.8571V15.6316C14.8571 17.2309 13.5786 18.5263 12 18.5263H4C2.42143 18.5263 1.14286 17.2309 1.14286 15.6316V4.63158H0.857143C0.382143 4.63158 0 4.24441 0 3.76316C0 3.28191 0.382143 2.89474 0.857143 2.89474H1.14286H2.85714H3.35L4.66071 0.900987C5.03214 0.340132 5.65714 0 6.325 0H9.67143C10.3393 0 10.9643 0.340132 11.3357 0.900987L11.3393 0.904605ZM2.85714 4.63158V15.6316C2.85714 16.272 3.36786 16.7895 4 16.7895H12C12.6321 16.7895 13.1429 16.272 13.1429 15.6316V4.63158H2.85714ZM5.71429 6.94737V14.4737C5.71429 14.7921 5.45714 15.0526 5.14286 15.0526C4.82857 15.0526 4.57143 14.7921 4.57143 14.4737V6.94737C4.57143 6.62895 4.82857 6.36842 5.14286 6.36842C5.45714 6.36842 5.71429 6.62895 5.71429 6.94737ZM8.57143 6.94737V14.4737C8.57143 14.7921 8.31429 15.0526 8 15.0526C7.68571 15.0526 7.42857 14.7921 7.42857 14.4737V6.94737C7.42857 6.62895 7.68571 6.36842 8 6.36842C8.31429 6.36842 8.57143 6.62895 8.57143 6.94737ZM11.4286 6.94737V14.4737C11.4286 14.7921 11.1714 15.0526 10.8571 15.0526C10.5429 15.0526 10.2857 14.7921 10.2857 14.4737V6.94737C10.2857 6.62895 10.5429 6.36842 10.8571 6.36842C11.1714 6.36842 11.4286 6.62895 11.4286 6.94737Z" fill="black"/>
                 </svg>
               </button>
             </div>
-            <div class="">
-              <div>
-                <div class="">
-                  <button disabled="" class="">
-                    <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="">
-                      <path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
-                    </svg>
-                  </button>
-                  <div size="sm" role="textbox" aria-label="Antall produkter" class="text-center min-w-[8px] px-1 leading-none flex-1 text-sm">1</div>
-                  <button aria-label="Endre antall til 2" class="btn min-w-[var(--btn-size-sm)] text-sm px-0 btn-light btn-sm rounded-full">
-                    <i class="inline-flex self-center relative h-[1em] w-[1em]">
-                      <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-[1em] w-[1em] !m-0">
-                        <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
-                      </svg>
-                    </i>
-                  </button>
-                </div>
+            <div class="product-details">
+              <div class="edit-amount">
+                <button disabled="{item.quantity === 1}" class="reduce" on:click={() => reduceQuantity(item.id)}>
+                  <svg width="15" height="4" viewBox="0 0 15 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.9286 0H1.07143C0.479799 0 0 0.479799 0 1.07143V2.14286C0 2.73449 0.479799 3.21429 1.07143 3.21429H13.9286C14.5202 3.21429 15 2.73449 15 2.14286V1.07143C15 0.479799 14.5202 0 13.9286 0Z" fill="black"/>
+                  </svg>
+                </button>
+                <input type="number" aria-label="Antall produkter" bind:value={item.quantity}>
+                <button aria-label="Øk antall" class="increase" on:click={() => increaseQuantity(item.id)}>
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.9286 5.89286H9.10714V1.07143C9.10714 0.479799 8.62734 0 8.03571 0H6.96429C6.37266 0 5.89286 0.479799 5.89286 1.07143V5.89286H1.07143C0.479799 5.89286 0 6.37266 0 6.96429V8.03571C0 8.62734 0.479799 9.10714 1.07143 9.10714H5.89286V13.9286C5.89286 14.5202 6.37266 15 6.96429 15H8.03571C8.62734 15 9.10714 14.5202 9.10714 13.9286V9.10714H13.9286C14.5202 9.10714 15 8.62734 15 8.03571V6.96429C15 6.37266 14.5202 5.89286 13.9286 5.89286Z" fill="black"/>
+                  </svg>
+                </button>
               </div>
               <strong>
-                <span>kr&nbsp;179,00</span>
+                <span>kr&nbsp;{item.price * item.quantity}</span>
               </strong>
             </div>
           </div>
@@ -160,12 +178,87 @@
       }
     }
 
-    article {
-      margin-top: 1rem;
-    }
-
     .designed-file {
       border-radius: 9px;
     }
+
+    article {
+      margin-block: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #EEE;
+
+      .product-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+      }
+
+      .remove-product {
+        background-color: transparent;
+
+        &:hover {
+          svg path {
+            fill: tomato;
+          }
+        }
+      }
+
+      .product-details {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .edit-amount {
+        display: flex;
+        align-items: center;
+        background-color: #EEE;
+        border-radius: 8px;
+
+        button {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          cursor: pointer;
+          transition: transform 0.2s ease;
+
+          &.reduce {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+          }
+
+          &.increase {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+          }
+
+          &:not([disabled]):hover {
+            background-color: rgb(0 0 0 / .1);
+
+            svg path {
+              fill: tomato;
+            }
+          }
+        }
+
+        input {
+          max-width: 30px;
+          text-align: center;
+          border-block: 1px solid #EEE;
+          border-inline: none;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+
+          &[type=number] {
+            -moz-appearance: textfield;
+          }
+        }
+      }
+    }
+
   }
 </style>
