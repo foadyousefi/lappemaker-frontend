@@ -81,7 +81,7 @@
               </button>
             </div>
             <strong>
-              <span>kr&nbsp;{item.price * item.quantity}</span>
+              <span>kr&nbsp;{item.price * item.quantity},00</span>
             </strong>
           </div>
         </div>
@@ -91,7 +91,7 @@
   <footer>
     <div class="price-details">
         <strong>Delsum:</strong>
-        kr {cartTotal} (inkl. mva)
+        kr {cartTotal},00 (inkl. mva)
     </div>
     <a href="/handlekurv" class="btn">Til kasse</a>
   </footer>
