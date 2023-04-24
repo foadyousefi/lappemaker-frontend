@@ -2,6 +2,7 @@
   import { cartItems, minicartOpen } from "$lib/stores/cartItems";
 
   $: cartCount = $cartItems ? $cartItems.length : 0;
+  $: cartTotal = $cartItems ? $cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0) : 0;
 
   const removeProduct = (id) => {
     cartItems.update(items => items.filter(item => item.id !== id));
@@ -90,7 +91,7 @@
   <footer>
     <div class="price-details">
         <strong>Delsum:</strong>
-        kr 162,00 (inkl. mva)
+        kr {cartTotal} (inkl. mva)
     </div>
     <a href="/handlekurv" class="btn">Til kasse</a>
   </footer>
