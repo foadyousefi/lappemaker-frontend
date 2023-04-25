@@ -18,12 +18,12 @@ interface Item {
     design: string;
 }
 
-const storeCart = browser ? window.localStorage.getItem('cart_items') : null;
+const storeCart = browser ? window.localStorage.getItem('cart_items') : '[]';
 const items:Item[] = browser && isJsonString(storeCart) ? JSON.parse(storeCart) : [];
 
 const cartItems = writable<Item[]>(items);
 cartItems.subscribe((value:Item[]) => {
-    if (browser) {
+    if (browser && value) {
         window.localStorage.setItem('cart_items', JSON.stringify(value));
     }
 });
