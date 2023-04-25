@@ -29,12 +29,6 @@
       }
   })
 
-  $: inputsFilled = (firstInput.length > 0) + (secondInput.length > 0) + (thirdInput.length > 0)
-  $: maxFontSize = 100 - ((inputsFilled - 1) * 3)
-  $: firstFont = maxFontSize - firstInput.length * 3.2
-  $: secondFont = maxFontSize - secondInput.length * 2.4
-  $: thirdFont = maxFontSize - thirdInput.length * 2.4
-
   const inputStorage = () => {
     navnelapp.set({firstInput, secondInput, thirdInput, showIcon})
   }
