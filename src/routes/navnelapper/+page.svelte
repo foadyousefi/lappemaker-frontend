@@ -69,7 +69,16 @@
     })
   }
 
-  const addToCart = () => {
+  const addToCart = async () => {
+    const design = document.getElementById('resultImageCanvastop').toDataURL('image/png')
+    const res = await fetch('/api/navnelapp/design', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({design})
+    })
+    const designStore = await res.json()
     const cartItem = {
       id: uuid4(),
       productId: data.id,
@@ -83,7 +92,8 @@
       firstInput,
       secondInput,
       thirdInput,
-      design: document.getElementById('resultImageCanvastop').toDataURL('image/png')
+      designPath: designStore.url,
+      // design: document.getElementById('resultImageCanvastop').toDataURL('image/png')
     }
     cartItems.update(items => items ? [...items, cartItem] : [cartItem])
     minicartOpen.set(true)
