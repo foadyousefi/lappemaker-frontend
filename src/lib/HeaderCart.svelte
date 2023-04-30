@@ -1,5 +1,6 @@
 <script>
   import { cartItems, minicartOpen } from "$lib/stores/cartItems";
+  import { fade } from "svelte/transition";
 
   $: cartCount = $cartItems ? $cartItems.length : 0;
   $: cartTotal = $cartItems ? $cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0) : 0;
@@ -42,7 +43,7 @@
   <span class="cart-count">{cartCount}</span>
 </div>
 {#if $minicartOpen}
-  <div class="mini-cart-open-overlay" on:click={() => minicartOpen.set(false)}></div>
+  <div class="mini-cart-open-overlay" on:click={() => minicartOpen.set(false)} transition:fade></div>
 {/if}
 <aside class="sidebar-minicart {$minicartOpen ? 'open' : ''}">
   <header>
@@ -57,7 +58,7 @@
     {#if $cartItems}
       {#each $cartItems as item}
         <article>
-          <img class="designed-file" src="{item.design}" alt="" loading="lazy">
+          <img class="designed-file" src="{item.designPath}" alt="" loading="lazy">
           <div class="product-body">
             <div class="product-header">
               <h3>{item.title}</h3>
@@ -95,7 +96,7 @@
         <strong>Delsum:</strong>
         kr {cartTotal},00 (inkl. mva)
     </div>
-    <a href="/handlekurv" class="btn">Til kasse</a>
+    <a href="/kasse" class="btn">Til kasse</a>
   </footer>
 </aside>
 
@@ -154,7 +155,7 @@
     background-color: var(--minicart-background);
     padding: 1rem;
     z-index: 2;
-    transition: transform .9s cubic-bezier(.55,0,.1,1),box-shadow .5s ease;
+    transition: transform .9s cubic-bezier(.55,0,.1,1);
     transform: translate(400px);
 
     &.open {
