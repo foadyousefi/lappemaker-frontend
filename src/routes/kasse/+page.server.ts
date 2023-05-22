@@ -60,6 +60,7 @@ export const actions: Actions = {
    * is available, this will happen in the browser instead of here
    */
   payment: async ({ request, url }) => {
+    console.log('URL on payment: ', url)
     const domain = url.origin
     const data = await request.formData();
     let theData = data.get('cart_items')

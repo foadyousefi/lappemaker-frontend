@@ -4,21 +4,37 @@
   import { cartItems } from "$lib/stores/cartItems";
 
   export let data
+  export let form
+
   let sessionId
   onMount(async () => {
     let searchParams = new URLSearchParams(window.location.search)
     sessionId = searchParams.get('session_id')
-  })
 
+    const res = await fetch(`/api/order/create`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        path: 'the path'
+      })
+    })
+    const data = await res.json()
+    console.log('Data from API: ', data)
+  })
+$: form, console.log('Form: ', form)
   let customer = data.customer
 
   console.log('Data from Session: ', data)
 </script>
 
+<pre>
+  {JSON.stringify(form?.order, null, 2)}
+</pre>
 <h1>Ordren motatt <u>{customer.name}</u></h1>
-
 <form
-        action="?/create_order"
+        action="?/new_order"
         method="post"
         use:enhance={() => {
           // prevent default callback from resetting the form
