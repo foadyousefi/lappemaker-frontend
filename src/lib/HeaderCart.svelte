@@ -58,7 +58,7 @@
     {#if $cartItems}
       {#each $cartItems as item}
         <article>
-          <img class="designed-file" src="../{item.designPath}" alt="" loading="lazy">
+          <img class="designed-file" src="{item.designPath}" alt="" loading="lazy">
           <div class="product-body">
             <div class="product-header">
               <h3>{item.title}</h3>
