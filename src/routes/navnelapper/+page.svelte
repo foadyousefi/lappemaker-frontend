@@ -3,9 +3,9 @@
   import { onMount } from 'svelte';
   import navnelapp from '$lib/stores/navnelapp';
   import CanvasNavnelapp from '$lib/CanvasNavnelapp.svelte';
-  import { icons, selectedIcon, iconCategories } from '$lib/stores/icons';
-  import { backgrounds, selectedBackground, backgroundCategories } from '$lib/stores/backgrounds';
-  import { fonts, selectedFont, colors, selectedColor } from '$lib/stores/fonts';
+  import { iconCategories, icons, selectedIcon } from '$lib/stores/icons';
+  import { backgroundCategories, backgrounds, selectedBackground } from '$lib/stores/backgrounds';
+  import { colors, fonts, selectedColor, selectedFont } from '$lib/stores/fonts';
   import { cartItems, minicartOpen } from '$lib/stores/cartItems';
 
   export let data: PageData;
@@ -93,9 +93,8 @@
       secondInput,
       thirdInput,
       designPath: designStore.url,
-      // design: document.getElementById('resultImageCanvastop').toDataURL('image/png')
     }
-    cartItems.update(items => items ? [...items, cartItem] : [cartItem])
+    cartItems.update(items => items ? [cartItem, ...items] : [cartItem])
     minicartOpen.set(true)
   }
 
