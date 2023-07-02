@@ -71,7 +71,6 @@
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.save();
-      console.log('Show icon: ', showIcon)
       if (showIcon) {
         const image = new Image();
         image.src = $selectedIcon.path;
