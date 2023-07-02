@@ -213,7 +213,7 @@
       {/if}
       {#if selectedModifier === 'font'}
         <div class="fonts-section">
-          <h2>Velg en font</h2>
+          <h2>Velg skrift type</h2>
           <div class="fonts">
             {#each $fonts as font, i}
               <CanvasNavnelapp {showIcon} {firstInput} {secondInput} {thirdInput} index={stringId(i)} fontFamily={font} isFonts on:selectFont={() => selectFont(font)} />
