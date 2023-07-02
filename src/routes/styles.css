@@ -135,6 +135,7 @@ button:focus:not(:focus-visible) {
 }
 
 .order-actions .add-to-cart,
+.order-actions .show-preview,
 .btn {
 	display: flex;
 	align-items: center;
@@ -147,6 +148,7 @@ button:focus:not(:focus-visible) {
 	transition: background-color 200ms ease-in-out;
 }
 
-.order-actions .add-to-cart:hover {
+.order-actions .add-to-cart:hover,
+.order-actions .show-preview:hover {
 	background-color: #069898;
 }
