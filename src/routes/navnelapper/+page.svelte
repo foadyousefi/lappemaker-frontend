@@ -197,8 +197,8 @@
                   <svg
                           class="background-option {$selectedBackground.id === background.id ? 'selected' : ''}"
                           on:click={() => selectBackground(background)}
-                          width="160" height="69.33" viewBox="0 0 160 69.33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="160" height="69.33" rx="9" fill={background.value}/>
+                          width="190" height="82.13" viewBox="0 0 190 82.13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="190" height="82.13" rx="9" fill={background.value}/>
                   </svg>
                 {:else}
                   <img
@@ -323,7 +323,7 @@
       .icons-section,
       .backgrounds-section,
       .fonts-section {
-        padding: 0.5rem;
+        padding: 1rem;
         border: 1px solid #ccc;
       }
     }
