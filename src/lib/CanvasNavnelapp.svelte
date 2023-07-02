@@ -33,11 +33,12 @@
   $: firstFont = maxFontSize - firstInput.length * 5.2
   $: secondFont = maxFontSize - secondInput.length * 5.2
   $: thirdFont = maxFontSize - thirdInput.length * 5.2
+  $: textX = showIcon ? canvasWidth * 2 / 3 : canvasWidth / 2
   $: firstY = inputsFilled === 1 ? canvasHeight / 2 : inputsFilled === 2 ? canvasHeight / 3 : canvasHeight / 4.4
   $: secondY = inputsFilled === 1 ? canvasHeight / 2 : inputsFilled === 2 && firstInput ? canvasHeight / 1.4 : inputsFilled === 2 && thirdInput ? canvasHeight / 3 : canvasHeight / 2
   $: thirdY = inputsFilled === 1 ? canvasHeight / 2 : inputsFilled === 2 ? canvasHeight / 1.4 : canvasHeight / 1.30
 
-  $: firstInput, secondInput, thirdInput, fontFamily, $selectedIcon, $selectedBackground, $selectedColor, drawCanvas()
+  $: firstInput, secondInput, thirdInput, fontFamily, showIcon, $selectedIcon, $selectedBackground, $selectedColor, drawCanvas()
 
   onMount(() => {
     if (browser) {
@@ -62,18 +63,21 @@
       }
       ctx.fillStyle = $selectedColor;
       ctx.font = `bold ${firstFont}px ${fontFamily.family}`;
-      ctx.fillText(firstInput, canvasWidth * 2 / 3, firstY);
+      ctx.fillText(firstInput, textX, firstY);
       ctx.font = `bold ${secondFont}px ${fontFamily.family}`;
-      ctx.fillText(secondInput, canvasWidth * 2 / 3, secondY);
+      ctx.fillText(secondInput, textX, secondY);
       ctx.font = `bold ${thirdFont}px ${fontFamily.family}`;
-      ctx.fillText(thirdInput, canvasWidth * 2 / 3, thirdY);
+      ctx.fillText(thirdInput, textX, thirdY);
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.save();
-      const image = new Image();
-      image.src = $selectedIcon.path;
-      image.onload = () => {
-        ctx.drawImage(image, 0, 0, canvasWidth / 3, canvasHeight);
+      console.log('Show icon: ', showIcon)
+      if (showIcon) {
+        const image = new Image();
+        image.src = $selectedIcon.path;
+        image.onload = () => {
+          ctx.drawImage(image, 0, 0, canvasWidth / 3, canvasHeight);
+        }
       }
       ctx.globalCompositeOperation='destination-over'
       if ($selectedBackground.category === 'solidColor') {
